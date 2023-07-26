@@ -12,17 +12,22 @@ addBtn.addEventListener("click", function (e) {
   } else {
     notesObj = JSON.parse(notes);
   }
-  let myObj = {
-    title: addTitle.value,
-    text: addTxt.value
+  if (addTitle.value.trim() === "") {
+    alert('Enter Title Please');
+  } else {
+    let myObj = {
+      title: addTitle.value,
+      text: addTxt.value
+    };
+
+    notesObj.push(myObj);
+    localStorage.setItem("notes", JSON.stringify(notesObj));
+    addTxt.value = "";
+    addTitle.value = "";
+    showNotes();
   }
-  notesObj.push(myObj);
-  localStorage.setItem("notes", JSON.stringify(notesObj));
-  addTxt.value = "";
-  addTitle.value = "";
-  //   console.log(notesObj);
-  showNotes();
 });
+
 
 // Function to show elements from localStorage
 function showNotes() {
